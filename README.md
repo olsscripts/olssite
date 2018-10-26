@@ -26,7 +26,7 @@ settings and values.
 * **--email(-e) EMAIL:** to set the administrator email.
 * **--lsphp VERSION:** to set LSPHP version, such as 56. We currently support versions 54, 55, 56, 70, 71 and 72.
 * **--site(-s) SITEDOMAIN:** To install and setup your site with your chosen domain.
-* **--sitepath SITEPATH:** to specify a location for the new site installation or use an existing site installation.
+* **--sitepath SITEPATH:** to specify the location of your site's web files. 
 * **--listenport LISTENPORT:** to set the HTTP server listener port, default is 80.
 * **--ssllistenport LISTENPORT:** to set the HTTPS server listener port, default is 443.
 * **--uninstall:** to uninstall OpenLiteSpeed and remove the installation directory.
