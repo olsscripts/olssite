@@ -7,7 +7,7 @@ Description
 
 olssite is a one-click installation script for OpenLiteSpeed. Using this script,
 you can quickly and easily install OpenLiteSpeed with some modified config settings. We
-also provide a **-s** parameter that will install your site at the same time with an SSL Certificate. 
+also provide a **-s** parameter that will automatically install your site with an SSL Certificate. 
 
 
 Running olssite
