@@ -14,7 +14,7 @@ There is an **-s** parameter that will automatically install your site with an S
 Running Olssite
 --------
 
-olssite can be run in the following way:
+Olssite can be run in the following way:
 *./olssite.sh [options] [options] …*
 
 When run with no options, olssite will install OpenLiteSpeed with mostly default
