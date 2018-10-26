@@ -35,5 +35,5 @@ settings and values.
 * **--help(-h):** to display usage.
 
 =================================================================================
-    Credit to the original script @ https://github.com/litespeedtech/ols1clk
+ 
 =================================================================================
