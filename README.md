@@ -24,7 +24,7 @@ settings and values.
 * **--adminpassword(-a) [PASSWORD]:** To set set the WebAdmin password for OpenLiteSpeed instead of a random one.
   * If you omit **[PASSWORD]**, olssite will prompt you to provide this password during installation.
 * **--email(-e) EMAIL:** to set the administrator email.
-* **--lsphp VERSION:** to set LSPHP version, such as 56. We currently support versions 54, 55, 56, and 70.
+* **--lsphp VERSION:** to set LSPHP version, such as 56. We currently support versions 54, 55, 56, 70, 71 and 72.
 * **--site(-s) SITEDOMAIN:** To install and setup your site with your chosen domain.
 * **--sitepath SITEPATH:** to specify a location for the new site installation or use an existing site installation.
 * **--listenport LISTENPORT:** to set the HTTP server listener port, default is 80.
