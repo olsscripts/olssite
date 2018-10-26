@@ -33,7 +33,7 @@ settings and values.
 * **--purgeall:** to uninstall OpenLiteSpeed, remove the installation directory, and purge all data in MySQL.
 * **--version(-v):** to display version information.
 * **--help(-h):** to display usage.
-isplay usage
+
 =================================================================================
-credit
+Credit to the original script @ https://github.com/litespeedtech/ols1clk
 =================================================================================
