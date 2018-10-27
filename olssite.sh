@@ -1047,17 +1047,6 @@ $SERVER_ROOT/bin/lswsctrl start
 chmod 600 "$SERVER_ROOT/password"
 echoY "Please be aware that your password was written to file '$SERVER_ROOT/password'." 
 
-if [ "x$ALLERRORS" = "x0" ] ; then
-    echoG "Congratulations! Installation finished."
-else
-    echoY "Installation finished. Some errors seem to have occured, please check this as you may need to manually fix them."
-fi  
-
-if [ "x$INSTALLSITE" = "x1" ] ; then
-    echoG "You can now access your site at https://$SITEDOMAIN"
-    echoG "You OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
-	echoG "with the default Username:Admin and the selected/default password"
-fi
 
 echo
 echoY "Testing ..."
@@ -1068,8 +1057,19 @@ else
     test_ols
 fi
 
+if [ "x$ALLERRORS" = "x0" ] ; then
+    echoG "Congratulations! Installation finished."
+else
+    echoY "Installation finished. Some errors seem to have occured, please check this as you may need to manually fix them."
+fi  
+
+if [ "x$INSTALLSITE" = "x1" ] ; then
+    echoG "You can now access your site at https://$SITEDOMAIN"
+    echoG "You OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
+	echoG "UserName:Admin   Password:$ADMINPASSWORD"
+fi
+
 echo
-echoG "If you have an existing certificate and private key for your site, you will need to replace the $KEY and $CERT in $SERVER_ROOT/conf with these files."
 echoG 'Thanks for using "OpenLiteSpeed One click installation".'
 echoG "Enjoy!"
 echo
