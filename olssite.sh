@@ -1024,10 +1024,11 @@ gen_selfsigned_cert
   
 if [ "x$SITEINSTALLED" != "x1" ] ; then
         install_site
-		config_ols_site
-		install_ssl
+	config_ols_site
+	install_ssl
 else
     #normal ols installation without a site
+    gen_selfsigned_cert
     config_ols
 fi
 
@@ -1057,6 +1058,7 @@ else
     test_ols
 fi
 
+
 if [ "x$ALLERRORS" = "x0" ] ; then
     echoG "Congratulations! Installation finished."
 else
@@ -1064,9 +1066,9 @@ else
 fi  
 
 if [ "x$INSTALLSITE" = "x1" ] ; then
-    echoG "You can now access your site at https://$SITEDOMAIN"
-    echoG "You OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
-	echoG "UserName:Admin   Password:$ADMINPASSWORD"
+    echo "You can now access your site at https://$SITEDOMAIN"
+    echo "The OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
+	echoG "WebAdmin Username:Admin   Password:$ADMINPASSWORD"
 fi
 
 echo
