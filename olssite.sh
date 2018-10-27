@@ -1052,7 +1052,7 @@ fi
 
 echo
 echoG "If you have an existing certificate and private key for your site, you will need to replace the $KEY and $CERT in $SERVER_ROOT/conf with these files."
-echoG 'Thanks for using "OpenLiteSpeed One click installation".'
+echoG "Thanks for using "OpenLiteSpeed One click installation."
 echoG "Enjoy!"
 echo
 echo
