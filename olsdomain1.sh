@@ -27,7 +27,7 @@ fn_install_site() {
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv /logs $SITEPATH
+	    mv $SITEPATH/logs $SITEPATH
 	    chown -R nobody:nobody $SITEPATH
 	   
     else
