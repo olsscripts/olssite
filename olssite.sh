@@ -1049,10 +1049,9 @@ if [ "x$INSTALLSITE" = "x1" ] ; then
 else
     test_ols
 fi
-
 echo
-echoG "If you have an existing certificate and private key for your site, you will need to replace the $KEY and $CERT in $SERVER_ROOT/conf with these files."
-echoG "Thanks for using "OpenLiteSpeed One click installation."
+echoG "If you run into any problems, they can sometimes be fixed by running with the --purgeall flag and reinstalling."
+echoG 'Thanks for using "OpenLiteSpeed One click installation".'
 echoG "Enjoy!"
 echo
 echo
