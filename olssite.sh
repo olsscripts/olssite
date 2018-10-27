@@ -388,12 +388,12 @@ function install_site
         local SITEDIRNAME=`dirname $SITEPATH`
         local SITEBASENAME=`basename $SITEPATH`
         mkdir -p "$SITEDIRNAME"
-        cd "$SITEDIRNAME"
+        cd "$SITEPATH"
 		
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/blob/master/sitefiles.tar.gz
-	    tar -xzf $SITEPATH/sitefiles.tar.gz
-	    rm -f $SITEPATH/sitefiles.tar.gz
-	    mv $SITEPATH/logs $SITEPATH
+	    tar -xzf sitefiles.tar.gz
+	    rm sitefiles.tar.gz
+	    mv /logs $SITEPATH
 	    chown -R nobody:nobody $SITEPATH
 	   
     else
