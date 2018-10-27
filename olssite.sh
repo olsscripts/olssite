@@ -1019,7 +1019,7 @@ echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROO
 
 
 set_ols_password
-gen_selfsigned_cert
+#gen_selfsigned_cert
   
 if [ "x$SITEINSTALLED" != "x1" ] ; then
         install_site
