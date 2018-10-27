@@ -53,7 +53,7 @@ SITEPATH=$SERVER_ROOT/mysite
 SITEPORT=80
 SSLSITEPORT=443
 SITEDOMAIN=*
-
+FORCEYES=0
 
 
 #All lsphp versions, keep using two digits to identify a version!!!
