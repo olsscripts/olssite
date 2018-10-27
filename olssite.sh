@@ -388,7 +388,6 @@ function install_site
         local SITEDIRNAME=`dirname $SITEPATH`
         local SITEBASENAME=`basename $SITEPATH`
         mkdir -p "$SITEDIRNAME"
-        cd "$SITEPATH"
 		
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd "$SITEPATH"
