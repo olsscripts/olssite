@@ -391,8 +391,9 @@ function install_site
         cd "$SITEDIRNAME"
 		
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/blob/master/sitefiles.tar.gz
-		mv $SITEPATH/logs $SITEPATH
-		chown -R nobody:nobody $SITEPATH
+	    tar -xzvf sitefiles.tar.gz
+	    mv $SITEPATH/logs $SITEPATH
+	    chown -R nobody:nobody $SITEPATH
 	   
     else
         echoY "$SITEPATH exists, it will be used."
