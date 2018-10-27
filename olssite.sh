@@ -975,10 +975,10 @@ echoY "LSPHP version:            " "$LSPHPVER"
 
 SITEINSTALLED=
 if [ "x$INSTALLSITE" = "x1" ] ; then
-    echoY "Install Site:             " Yes
-    echoY "Site HTTP port:           " "$SITEPORT"
-    echoY "Site HTTPS port:          " "$SSLSITEPORT"
-    echoY "Site domain:              " "$SITEDOMAIN"
+    echoY "Install Site:              " Yes
+    echoY "Site HTTP port:            " "$SITEPORT"
+    echoY "Site HTTPS port:           " "$SSLSITEPORT"
+    echoY "Site domain:               " "$SITEDOMAIN"
   
     if [ -e "$SITEPATH" ] ; then
         echoY "Site location:            " "$SITEPATH (Existing)"
