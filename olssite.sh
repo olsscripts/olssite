@@ -1058,7 +1058,7 @@ else
     test_ols
 fi
 
-
+echo
 if [ "x$ALLERRORS" = "x0" ] ; then
     echoG "Congratulations! Installation finished."
 else
@@ -1068,7 +1068,7 @@ fi
 if [ "x$INSTALLSITE" = "x1" ] ; then
     echo "You can now access your site at https://$SITEDOMAIN"
     echo "The OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
-	echoG "WebAdmin Username:Admin   Password:$ADMINPASSWORD"
+	echo "WebAdmin Username:Admin   Password:$ADMINPASSWORD"
 fi
 
 echo
