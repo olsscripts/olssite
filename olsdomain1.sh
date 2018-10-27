@@ -21,12 +21,10 @@ VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf $
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then 
-        local SITEDIRNAME=`dirname $SITEPATH`
-        local SITEBASENAME=`basename $SITEPATH`
-        mkdir -p "$SITEDIRNAME"
+        mkdir -p $SITEPATH
 		
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
-	    cd "$SITEPATH"
+	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
 	    mv /logs $SITEPATH
@@ -51,7 +49,9 @@ fn_config_httpd() {
         if [ $? != 0 ] ; then
             sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
-
+	    sed -i '/listener\b/a \ \ map                     $DOMAIN $DOMAIN' -i.bkp /usr/local/lsws/conf/httpd_config.conf
+            sed -e "s/map                      Example *//g" -i.backup /usr/local/lsws/conf/httpd_config.conf
+            sed -e "s/map                     Example *//g" /usr/local/lsws/conf/httpd_config.conf
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$DOMAIN/vhconf.conf
 
             cat >> $SERVER_ROOT/conf/httpd_config.conf <<END 
@@ -64,6 +64,7 @@ enableScript            1
 restrained              0
 setUIDMode              2
 }
+suspendedVhosts           Example
 END
     
             mkdir -p $SERVER_ROOT/conf/vhosts/$DOMAIN/
@@ -141,14 +142,12 @@ while [ "$1" != "" ] ; do
         -d| --domain )         
                                     shift
                                     DOMAIN=$1
-									fn_install_site
                                     ;;
                                     
                                     
        -s| --sitepath )           
                                     shift
-                                    SITEPATH=$1
-									fn_install_site
+                                    SITEPATH=$1			
                                     ;;
 
                                     
