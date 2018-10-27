@@ -391,6 +391,7 @@ function install_site
         cd "$SITEPATH"
 		
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
+	    cd "$SITEPATH"
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
 	    mv /logs $SITEPATH
@@ -836,8 +837,8 @@ function test_ols
 function test_site
 {
     test_page http://localhost:8088/  Congratulation "Test Example vhost Page" 
-    test_page http://localhost:$SITEPORT/ "data-continue" "Test HTTP first Page" 
-    test_page https://localhost:$SSLSITEPORT/ "data-continue" "Test HTTPS first Page" 
+    test_page http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Test HTTP first Page" 
+    test_page https://$SITEDOMAIN:$SSLSITEPORT/ "Congratulation" "Test HTTPS first Page" 
 }
 
 #####################################################################################
@@ -1053,7 +1054,7 @@ else
 fi  
 
 if [ "x$INSTALLSITE" = "x1" ] ; then
-    echoG "You can now access your site at https://$SITEDOMAIN:$SITEPORT"
+    echoG "You can now access your site at https://$SITEDOMAIN"
     echoG "You OpenLiteSpeed Admin panel can now be accessed at https://$SITEDOMAIN:$ADMINPORT"
 	echoG "with the default Username:Admin and the selected/default password"
 fi
