@@ -955,7 +955,7 @@ ADMINPASSWORD=$TEMPPASSWORD
 
 
 if [ "x$USEDEFAULTLSPHP" = "x1" ] ; then
-    if [ "x$INSTALLSITE" = "x1" ] && [ -e "$SITEPATH/my-config.php" ] ; then
+    if [ "x$INSTALLSITE" = "x1" ] && [ -e "$SITEPATH" ] ; then
         #For existing site, choose lsphp56 as default
         LSPHPVER=56
     fi
@@ -976,7 +976,7 @@ if [ "x$INSTALLSITE" = "x1" ] ; then
     echoY "Site HTTPS port:     " "$SSLSITEPORT"
     echoY "Site domain:         " "$SITEDOMAIN"
   
-    if [ -e "$SITEPATH/my-config.php" ] ; then
+    if [ -e "$SITEPATH" ] ; then
         echoY "Site location:       " "$SITEPATH (Existing)"
         SITEINSTALLED=1
     else
