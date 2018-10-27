@@ -975,16 +975,16 @@ echoY "LSPHP version:            " "$LSPHPVER"
 
 SITEINSTALLED=
 if [ "x$INSTALLSITE" = "x1" ] ; then
-    echoY "Install Site:        " Yes
-    echoY "Site HTTP port:      " "$SITEPORT"
-    echoY "Site HTTPS port:     " "$SSLSITEPORT"
-    echoY "Site domain:         " "$SITEDOMAIN"
+    echoY "Install Site:            " Yes
+    echoY "Site HTTP port:          " "$SITEPORT"
+    echoY "Site HTTPS port:         " "$SSLSITEPORT"
+    echoY "Site domain:             " "$SITEDOMAIN"
   
     if [ -e "$SITEPATH" ] ; then
-        echoY "Site location:       " "$SITEPATH (Existing)"
+        echoY "Site location:            " "$SITEPATH (Existing)"
         SITEINSTALLED=1
     else
-        echoY "Site location:       " "$SITEPATH (New install)"
+        echoY "Site location:            " "$SITEPATH (New install)"
         SITEINSTALLED=0
     fi
 else
@@ -994,7 +994,7 @@ fi
 
 echo
 
-if [ "x$FORCEYES" != "x0" ] ; then
+if [ "x$FORCEYES" != "x1" ] ; then
     printf '\033[31mAre these settings correct? Type n to quit, otherwise will continue.[Y/n]\033[0m '
     read answer
     echo
