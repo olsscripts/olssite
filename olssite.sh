@@ -390,7 +390,7 @@ function install_site
         mkdir -p "$SITEDIRNAME"
         cd "$SITEPATH"
 		
-	    wget -P $SITEPATH https://github.com/olsscripts/olssite/blob/master/sitefiles.tar.gz
+	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
 	    mv /logs $SITEPATH
