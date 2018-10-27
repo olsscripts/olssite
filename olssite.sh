@@ -975,7 +975,7 @@ if [ "x$INSTALLSITE" = "x1" ] ; then
     echoY "Site HTTP port:      " "$SITEPORT"
     echoY "Site HTTPS port:     " "$SSLSITEPORT"
     echoY "Site domain:         " "$SITEDOMAIN"
-    #echoY "Site location:       " "$SITEPATH"
+
   
     #if [ -e "$SITEPATH" ] ; then
         #echoY "Site location:       " "$SITEPATH (Existing)"
