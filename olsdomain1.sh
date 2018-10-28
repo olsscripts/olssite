@@ -17,8 +17,7 @@ VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf e
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then 
-        mkdir -p $SITEPATH
-		
+            mkdir -p $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
@@ -27,7 +26,7 @@ fn_install_site() {
 	    chown -R nobody:nobody $DOMPATH
 	   
     else
-        echoY "$SITEPATH exists, it will be used."
+        echoY "$SITEPATH already exists."
     fi
 }
 
@@ -111,18 +110,15 @@ END
 fn_usage() {
     echoY "USAGE:                             " "$0 [options] [options] ..."
     echoY "OPTIONS                            "
-    echoG " --site(-s) DOMAIN             " "To install and setup your site with your chosen domain."
-    echoG " --sitepath SITEPATH               " "To specify a location for the new site installation or use an existing site installation."
+    echoG " --domain(-d) DOMAIN               " "To install your site with your chosen domain(option required)."
+    echoG " --sitepath(-s) SITEPATH           " "To specify a location for the new site installation(option required)."
+    echoG " --email(-e) SITEPATH              " "To specify an email for SSL installation(option required)."
     echoG " --quiet                           " "Set to quiet mode, won't prompt to input anything."
     echoG " --help(-h)                        " "To display usage."
     echo
-    echoY "EXAMPLES                           "
-    echoG "./ols1clk.sh                       " "To install the latest version of OpenLiteSpeed with a random WebAdmin password."
-    echoG "./olsdomain --site my2nddomain.com --sitepath /home/myuser/wwww"  ""
-    echoG "./ols1clk.sh -a 123 -r 1234 --wordpressplus a.com"  ""
-    echo  "                                   To install OpenLiteSpeed with a fully configured WordPress installation at \"a.com\" using WebAdmin password \"123\" and MySQL root password \"1234\"."
-    echoG "./ols1clk.sh -a 123 -r 1234 --wplang zh_CN --sitetitle mySite --wordpressplus a.com"  ""
-    echo  "                                   To install OpenLiteSpeed with a fully configured Chinese (China) language WordPress installation at \"a.com\" using WebAdmin password \"123\",  MySQL root password \"1234\", and WordPress site title \"mySite\"."
+    echoY "EXAMPLE                           "
+    echoG "./olsdomain -d mysite.com -e myemail@myprovider.com -s /home/myuser/www"  ""
+    echo  "                                   To install your site \"mysite.com\" in the \"/home/myuser/www\" server folder and use your email \"myemail@myprovider.com\" for SSL certificate."
     echo
 }
 
