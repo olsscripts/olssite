@@ -17,7 +17,7 @@ VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf e
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then 
-            mkdir -p $SITEPATH
+            mkdir -P $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
@@ -111,13 +111,13 @@ fn_usage() {
     echoY "USAGE:                             " "$0 [options] [options] ..."
     echoY "OPTIONS                            "
     echoG " --domain(-d) DOMAIN               " "To install your site with your chosen domain(option required)."
-    echoG " --sitepath(-s) SITEPATH           " "To specify a location for the new site installation(option required)."
+    echoG " --sitepath(-p) SITEPATH           " "To specify a location for the new site installation(option required)."
     echoG " --email(-e) SITEPATH              " "To specify an email for SSL installation(option required)."
     echoG " --quiet                           " "Set to quiet mode, won't prompt to input anything."
     echoG " --help(-h)                        " "To display usage."
     echo
     echoY "EXAMPLE                           "
-    echoG "./olsdomain -d mysite.com -e myemail@myprovider.com -s /home/myuser/www"  ""
+    echoG "./olsdomain -d mysite.com -e myemail@myprovider.com -p /home/myuser/www"  ""
     echo  "                                   To install your site \"mysite.com\" in the \"/home/myuser/www\" server folder and use your email \"myemail@myprovider.com\" for SSL certificate."
     echo
 }
@@ -135,7 +135,7 @@ while [ "$1" != "" ] ; do
                                     ;;
                                     
                                     
-       -s| --sitepath )           
+       -p| --sitepath )           
                                     shift
                                     SITEPATH=$1			
                                     ;;
