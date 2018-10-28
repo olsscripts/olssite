@@ -50,7 +50,7 @@ fn_config_httpd() {
         if [ $? != 0 ] ; then
             sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
-	    sed -i '/listener\b/a \ \ map                     echo$DOMAIN echo $DOMAIN' -i.bkp /usr/local/lsws/conf/httpd_config.conf
+	    sed -i '/listener\b/a \ \ map                     $DOMAIN var=$DOMAIN' -i.bkp /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$DOMAIN/vhconf.conf
