@@ -39,7 +39,7 @@ fn_install_site() {
 fn_install_ssl() {
         #SSL INSTALL#
         systemctl stop lsws
-        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
+        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN $VIRTHOST
         systemctl start lsws
 		
 }	
