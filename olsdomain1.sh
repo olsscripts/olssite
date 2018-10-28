@@ -39,7 +39,7 @@ fn_install_site() {
 fn_install_ssl() {
         #SSL INSTALL#
         systemctl stop lsws
-        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN $VIRTHOST
+        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
         systemctl start lsws
 		
 }	
@@ -50,7 +50,7 @@ fn_config_httpd() {
         if [ $? != 0 ] ; then
             sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
-	    sed -i '/listener\b/a \ \ map                     $DOMAIN var=$DOMAIN' -i.bkp /usr/local/lsws/conf/httpd_config.conf
+	    sed -i "/listener\b/a \ \ map                     $DOMAIN $DOMAIN" -i.bkp /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$DOMAIN/vhconf.conf
@@ -109,7 +109,7 @@ END
         
         
     else
-        echoR "$SERVER_ROOT/conf/httpd_config.conf is missing. It appears that something went wrong during OpenLiteSpeed installation."
+        echoR "$SERVER_ROOT/conf/httpd_config.conf is missing."
         ALLERRORS=1
     fi
 }
