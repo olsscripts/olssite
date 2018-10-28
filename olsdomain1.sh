@@ -6,13 +6,13 @@ ALLERRORS=0
 #Site settings
 INSTALLSITE=0
 SITEPATH=
-DOMAIN=*
+DOMAIN=
 EMAIL=
 
 #Webserver settings
 SERVER_ROOT=/usr/local/lsws
-PUBLIC_HTML=$SERVER_ROOT/lsws/www/
-DOMAINPATH=$PUBLIC_HTML/$DOMAIN
+PUBLIC_HTML=/usr/local/lsws/www/
+DOMAINPATH=/usr/local/lsws/www/$DOMAIN
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_install_site() {
