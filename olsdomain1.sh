@@ -6,6 +6,7 @@ INSTALLSITE=0
 SITEPATH=
 DOMAIN=*
 EMAIL=
+WWROOT=/usr/local/lsws/www/
 
 SERVER_ROOT=/usr/local/lsws
 
@@ -27,7 +28,7 @@ fn_install_site() {
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv $SITEPATH/logs $SITEPATH
+	    mv $SITEPATH/logs $WWROOT/$DOMAIN
 	    chown -R nobody:nobody $SITEPATH
 	   
     else
