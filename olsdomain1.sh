@@ -12,18 +12,17 @@ EMAIL=
 #Webserver settings
 SERVER_ROOT=/usr/local/lsws
 PUBLIC_HTML=/usr/local/lsws/www/
-DOMAINPATH=/usr/local/lsws/www/$DOMAIN
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then 
-            mkdir -P $SITEPATH
+            mkdir -p $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv $SITEPATH/logs $DOMPATH
-	    chown -R nobody:nobody $DOMPATH
+	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
+	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
 	   
     else
         echoY "$SITEPATH already exists."
