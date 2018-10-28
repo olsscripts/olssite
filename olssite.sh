@@ -37,6 +37,7 @@ OSVER=
 OSTYPE=`uname -m`
 
 SERVER_ROOT=/usr/local/lsws
+WWROOT=/usr/local/lsws/www/
 
 #Current status
 OLSINSTALLED=
@@ -393,7 +394,7 @@ function install_site
 	    cd "$SITEPATH"
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv /logs $SITEPATH
+	    mv $SITEPATH/logs $WWROOT/$SITEDOMAIN
 	    chown -R nobody:nobody $SITEPATH
 	   
     else
@@ -595,6 +596,7 @@ listener Main {
   map                     $SITEDOMAIN $SITEDOMAIN
   map                     Example *
 }
+
 listener SSL {
   address                 *:443
   secure                  1
@@ -604,6 +606,8 @@ listener SSL {
   map                     $SITEDOMAIN $SITEDOMAIN
   map                     Example *
  }
+ 
+ suspendedVhosts           Example
 
 
 END
@@ -835,7 +839,7 @@ function test_ols
 
 function test_site
 {
-    test_page http://localhost:8088/  Congratulation "Test Example vhost Page" 
+    #test_page http://localhost:8088/  Congratulation "Test Example vhost Page" 
     test_page http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Test HTTP first Page" 
     test_page https://$SITEDOMAIN:$SSLSITEPORT/ "Congratulation" "Test HTTPS first Page" 
 }
