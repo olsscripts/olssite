@@ -35,7 +35,42 @@ fn_install_ssl() {
         /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
         systemctl start lsws
 		
-}	
+}
+
+fn_restart_ols() {
+	echo
+	echoG 'Domain Installed".'
+	echoY 'Restarting OpenLiteSpeed Webserver"..'
+	$SERVER_ROOT/bin/lswsctrl restart
+	echo
+}
+
+fn_test_domain() {
+	echo
+        echoY "Testing ..."
+   	fn_test_site
+}
+
+fn_test_webpage() {
+	local URL=$1
+        local KEYWORD=$2
+        local PAGENAME=$3
+
+        rm -rf tmp.tmp
+        wget --no-check-certificate -O tmp.tmp  $URL >/dev/null 2>&1
+        grep "$KEYWORD" tmp.tmp  >/dev/null 2>&1
+    
+        if [ $? != 0 ] ; then
+        echoR "Error: $PAGENAME Failed."
+    else
+        echoG "OK: $PAGENAME Passed."
+    fi
+    rm tmp.tmp
+}
+
+fn_test_site() {
+	fn_test_webpage http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Test HTTP first Page"  
+}
 
 fn_config_httpd() {
     if [ -e "$SERVER_ROOT/conf/httpd_config.conf" ] ; then
@@ -158,7 +193,15 @@ done
 fn_install_site
 fn_config_httpd
 fn_install_ssl
+fn_test_domain
 
+echo
+if [ "x$ALLERRORS" = "x0" ] ; then
+    echoG "Congratulations!"
+else
+    echoY "Installation finished. Some errors seem to have occured, please check this as you may need to manually fix them."
+fi  
+echo "Your site is now live at https://$SITEDOMAIN"
 echo
 echo
 echo
