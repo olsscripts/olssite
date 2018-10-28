@@ -1,23 +1,18 @@
 #!/bin/bash
 
+FORCEYES=0
+ALLERRORS=0
 
 #Site settings
 INSTALLSITE=0
 SITEPATH=
 DOMAIN=*
 EMAIL=
-WWROOT=/usr/local/lsws/www/
 
+#Webserver settings
 SERVER_ROOT=/usr/local/lsws
-
-FORCEYES=0
-ALLERRORS=0
-
-ACTION=INSTALL
-FOLLOWPARAM=
-
-MYGITHUBURL=https://raw.githubusercontent.com/olsscripts/olssite/master/olssite.sh
-
+PUBLIC_HTML=$SERVER_ROOT/lsws/www/
+DOMAINPATH=$PUBLIC_HTML/$DOMAIN
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_install_site() {
@@ -28,8 +23,8 @@ fn_install_site() {
 	    cd $SITEPATH
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv $SITEPATH/logs $WWROOT/$DOMAIN
-	    chown -R nobody:nobody $SITEPATH
+	    mv $SITEPATH/logs $DOMPATH
+	    chown -R nobody:nobody $DOMPATH
 	   
     else
         echoY "$SITEPATH exists, it will be used."
@@ -48,8 +43,6 @@ fn_config_httpd() {
     if [ -e "$SERVER_ROOT/conf/httpd_config.conf" ] ; then
         cat $SERVER_ROOT/conf/httpd_config.conf | grep "virtualhost $DOMAIN" >/dev/null
         if [ $? != 0 ] ; then
-            sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
-            sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
 	    sed -i "/listener\b/a \ \ map                     $DOMAIN $DOMAIN" -i.bkp /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
             sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
