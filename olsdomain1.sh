@@ -4,7 +4,7 @@
 #Site settings
 INSTALLSITE=0
 SITEPATH=
-DOMAIN=
+DOMAIN=*
 EMAIL=
 
 SERVER_ROOT=/usr/local/lsws
