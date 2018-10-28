@@ -18,7 +18,7 @@ FOLLOWPARAM=
 
 MYGITHUBURL=https://raw.githubusercontent.com/olsscripts/olssite/master/olssite.sh
 
-VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
+VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then 
@@ -39,7 +39,7 @@ fn_install_site() {
 fn_install_ssl() {
         #SSL INSTALL#
         systemctl stop lsws
-        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN,$VIRTHOST
+        /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
         systemctl start lsws
 		
 }	
