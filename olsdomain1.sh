@@ -39,8 +39,8 @@ fn_install_ssl() {
 
 fn_restart_ols() {
 	echo
-	echo 'Domain Installed".'
-	echo 'Restarting OpenLiteSpeed Webserver"..'
+	echo "Domain Installed"
+	echo "Restarting OpenLiteSpeed Webserver"
 	$SERVER_ROOT/bin/lswsctrl restart
 	echo
 }
@@ -72,7 +72,7 @@ fn_test_webpage() {
 }
 
 fn_test_site() {
-	fn_test_webpage http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Test HTTP first Page"  
+	fn_test_webpage http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Site test"  
 }
 
 fn_config_httpd() {
