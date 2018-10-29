@@ -711,7 +711,7 @@ function changeOlsPassword
 {
     LSWS_HOME=$SERVER_ROOT
     ENCRYPT_PASS=`"$LSWS_HOME/admin/fcgi-bin/admin_php" -q "$LSWS_HOME/admin/misc/htpasswd.php" $ADMINPASSWORD`
-    echo "$ADMINUSER:$ENCRYPT_PASS" > "$LSWS_HOME/admin/conf/htpasswd"
+    echo "$ADMIN_USER:$ENCRYPT_PASS" > "$LSWS_HOME/admin/conf/htpasswd"
     echoY "Finished setting OpenLiteSpeed WebAdmin password to $ADMINPASSWORD."
 }
 
