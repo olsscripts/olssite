@@ -47,7 +47,7 @@ fn_restart_ols() {
 
 fn_test_domain() {
 	echo
-        echoY "Testing ..."
+        echo "Testing ..."
    	fn_test_site
 }
 
@@ -61,7 +61,7 @@ fn_test_webpage() {
         grep "$KEYWORD" tmp.tmp  >/dev/null 2>&1
     
         if [ $? != 0 ] ; then
-        echoR "Error: $PAGENAME Failed."
+        echo "Error: $PAGENAME Failed."
     else
         echoG "OK: $PAGENAME Passed."
     fi
@@ -197,11 +197,11 @@ fn_test_domain
 
 echo
 if [ "x$ALLERRORS" = "x0" ] ; then
-    echoG "Congratulations!"
+    echo "Congratulations!"
+    echo "Your site is now live at https://$SITEDOMAIN"
 else
     echoY "Installation finished. Some errors seem to have occured, please check this as you may need to manually fix them."
 fi  
-echo "Your site is now live at https://$SITEDOMAIN"
 echo
 echo
 echo
