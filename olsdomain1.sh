@@ -16,6 +16,7 @@ VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf e
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then
+            echo
     	    echoY "Installing your Site ..."
             mkdir -p $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
