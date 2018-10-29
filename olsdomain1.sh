@@ -64,6 +64,9 @@ fn_test_webpage() {
         echo "Error: $PAGENAME Failed."
     else
         echoG "OK: $PAGENAME Passed."
+	echo
+	echo "Congratulations!"
+        echo "Your site is now live at https://$SITEDOMAIN"
     fi
     rm tmp.tmp
 }
@@ -196,13 +199,6 @@ fn_install_ssl
 fn_restart_ols
 fn_test_domain
 
-echo
-if [ "x$ALLERRORS" = "x0" ] ; then
-    echo "Congratulations!"
-    echo "Your site is now live at https://$SITEDOMAIN"
-else
-    echoY "Installation finished. Some errors seem to have occured, please check this as you may need to manually fix them."
-fi  
 echo
 echo
 echo
