@@ -39,8 +39,8 @@ fn_install_ssl() {
 
 fn_restart_ols() {
 	echo
-	echoG 'Domain Installed".'
-	echoY 'Restarting OpenLiteSpeed Webserver"..'
+	echo 'Domain Installed".'
+	echo 'Restarting OpenLiteSpeed Webserver"..'
 	$SERVER_ROOT/bin/lswsctrl restart
 	echo
 }
