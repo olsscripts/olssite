@@ -734,23 +734,23 @@ function uninstall
     fi
 }
 
-function read_password
-{
-    if [ "x$1" != "x" ] ; then 
-        TEMPPASSWORD=$1
-    else
-        passwd=
-        echoY "Please input password for $2(press enter to get a random one):"
-        read passwd
-        if [ "x$passwd" = "x" ] ; then
-            local RAND=$RANDOM
-            local DATE0=`date`
-            TEMPPASSWORD=`echo "$RAND0$DATE0" |  md5sum | base64 | head -c 8`
-        else
-            TEMPPASSWORD=$passwd
-        fi
-    fi
-}
+#function read_password
+#{
+ #   if [ "x$1" != "x" ] ; then 
+  #      TEMPPASSWORD=$1
+   # else
+    #    passwd=
+     #   echoY "Please input password for $2(press enter to get a random one):"
+      #  read passwd
+       # if [ "x$passwd" = "x" ] ; then
+        #    local RAND=$RANDOM
+         #   local DATE0=`date`
+          #  TEMPPASSWORD=`echo "$RAND0$DATE0" |  md5sum | base64 | head -c 8`
+        #else
+         #   TEMPPASSWORD=$passwd
+        #fi
+    #fi
+#}
 
 
 function check_value_follow
@@ -998,8 +998,8 @@ if [ "x$EMAIL" = "x" ] ; then
     fi
 fi
 
-read_password "$ADMINPASSWORD" "webAdmin password"
-ADMINPASSWORD=$TEMPPASSWORD
+#read_password "$ADMINPASSWORD" "webAdmin password"
+#ADMINPASSWORD=$TEMPPASSWORD
 
 
 if [ "x$USEDEFAULTLSPHP" = "x1" ] ; then
