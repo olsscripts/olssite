@@ -899,10 +899,7 @@ while [ "$1" != "" ] ; do
                                     shift
                                     ADMINPORT=$FOLLOWPARAM
                                     ;;	
-			--adminuser )           check_value_follow "$2" "Admin user"
-                                    shift
-                                    ADMINUSER=$FOLLOWPARAM
-                                    ;;									
+											
 
         -e | --email )              check_value_follow "$2" "email address"
                                     shift
