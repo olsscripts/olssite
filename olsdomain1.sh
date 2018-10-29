@@ -23,6 +23,7 @@ fn_install_site() {
 	    rm sitefiles.tar.gz
 	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
+	    echoG "Domain Installed"
 	   
     else
         echoY "$SITEPATH already exists."
