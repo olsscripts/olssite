@@ -563,6 +563,7 @@ function change_ols_admin_port
     if [ -e "$SERVER_ROOT/admin/conf/admin_config.conf" ] ; then
 		sed -i "s/7080/$ADMINPORT/g" -i.bkp "$SERVER_ROOT/admin/conf/admin_config.conf"
 	fi
+}
 
 function config_ols
 {
@@ -588,7 +589,7 @@ END
         ALLERRORS=1
     fi
 }
-storagepath                      cachedata
+
 
 function config_ols_site
 {
