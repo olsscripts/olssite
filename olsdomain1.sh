@@ -6,7 +6,7 @@ ALLERRORS=0
 #Site settings
 INSTALLSITE=0
 SITEPATH=
-DOMAIN=
+DOMAIN=*
 EMAIL=
 
 #Webserver settings
