@@ -196,7 +196,7 @@ done
 fn_install_site
 fn_config_httpd
 fn_install_ssl
-fn_restart_ols
+#fn_restart_ols
 fn_test_domain
 
 echo
