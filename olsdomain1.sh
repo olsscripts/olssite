@@ -23,32 +23,47 @@ fn_install_site() {
 	    rm sitefiles.tar.gz
 	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
-	    echoG "Domain Installed"
+	    echo "Domain Installed"
 	   
     else
         echoY "$SITEPATH already exists."
     fi
 }
 
+function echoY
+{
+    FLAG=$1
+    shift
+    echo -e "\033[38;5;148m$FLAG\033[39m$@"
+}
+
+function echoG
+{
+    FLAG=$1
+    shift
+    echo -e "\033[38;5;71m$FLAG\033[39m$@"
+}
+
 fn_install_ssl() {
         #SSL INSTALL#
-        systemctl stop lsws
+        $SERVER_ROOT/bin/lswsctrl stop
         /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
-        systemctl start lsws
-		
+        echo
+	echoY "Restarting OpenLiteSpeed Webserver"
+	$SERVER_ROOT/bin/lswsctrl start
 }
 
 fn_restart_ols() {
 	echo
 	echo "Domain Installed"
-	echo "Restarting OpenLiteSpeed Webserver"
+	echoY "Restarting OpenLiteSpeed Webserver ..."
 	$SERVER_ROOT/bin/lswsctrl restart
 	echo
 }
 
 fn_test_domain() {
 	echo
-        echo "Testing ..."
+        echoY "Testing ..."
    	fn_test_site
 }
 
@@ -66,8 +81,8 @@ fn_test_webpage() {
     else
         echoG "OK: $PAGENAME Passed."
 	echo
-	echo "Congratulations!"
-        echo "Your site is now live at https://$SITEDOMAIN"
+	echoG "Congratulations!"
+        echo "Your site is now live at https://$DOMAIN"
     fi
     rm tmp.tmp
 }
