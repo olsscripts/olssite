@@ -81,8 +81,6 @@ fn_config_httpd() {
         cat $SERVER_ROOT/conf/httpd_config.conf | grep "virtualhost $DOMAIN" >/dev/null
         if [ $? != 0 ] ; then
 	    sed -i "/listener\b/a \ \ map                     $DOMAIN $DOMAIN" -i.bkp /usr/local/lsws/conf/httpd_config.conf
-            sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
-            sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$DOMAIN/vhconf.conf
 
             cat >> $SERVER_ROOT/conf/httpd_config.conf <<END 
@@ -95,7 +93,7 @@ enableScript            1
 restrained              0
 setUIDMode              2
 }
-suspendedVhosts           Example
+
 END
     
             mkdir -p $SERVER_ROOT/conf/vhosts/$DOMAIN/
