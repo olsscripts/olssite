@@ -31,13 +31,11 @@ function getRandPassword
     TEMPRANDSTR=`echo "$TEMPRANDSTR$RANDOM$DATE" |  md5sum | base64 | head -c 8`
 }
 
+#OS Info
 OSNAMEVER=UNKNOWN
 OSNAME=
 OSVER=
 OSTYPE=`uname -m`
-
-SERVER_ROOT=/usr/local/lsws
-WWROOT=/usr/local/lsws/www/
 
 #Current status
 OLSINSTALLED=
@@ -48,9 +46,13 @@ ADMINPASSWORD=$TEMPRANDSTR
 ADMINPORT=7080
 EMAIL=
 
+#Webserver settings
+SERVER_ROOT=/usr/local/lsws
+PUBLIC_HTML=/usr/local/lsws/www/
+
 #Site settings
 INSTALLSITE=0
-SITEPATH=$SERVER_ROOT/mysite
+SITEPATH=
 SITEPORT=80
 SSLSITEPORT=443
 SITEDOMAIN=*
@@ -394,8 +396,8 @@ function install_site
 	    cd "$SITEPATH"
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv $SITEPATH/logs $WWROOT/$SITEDOMAIN
-	    chown -R nobody:nobody $SITEPATH
+	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
+	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
 	   
     else
         echoY "$SITEPATH exists, it will be used."
@@ -573,6 +575,8 @@ function config_ols_site
         if [ $? != 0 ] ; then
             sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
+	    sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
+            sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
 
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$SITEDOMAIN/vhconf.conf
 
@@ -1023,7 +1027,6 @@ echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROO
 
 
 set_ols_password
-#gen_selfsigned_cert
   
 if [ "x$SITEINSTALLED" != "x1" ] ; then
         install_site
