@@ -72,7 +72,7 @@ fn_test_webpage() {
 }
 
 fn_test_site() {
-	fn_test_webpage http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Site test"  
+	fn_test_webpage http://$DOMAIN/ "Congratulation" "Site test"  
 }
 
 fn_config_httpd() {
