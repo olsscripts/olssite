@@ -15,7 +15,8 @@ PUBLIC_HTML=/usr/local/lsws/www/
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_install_site() {
-    if [ ! -e "$SITEPATH" ] ; then 
+    if [ ! -e "$SITEPATH" ] ; then
+    	    echoY "Installing your Site ..."
             mkdir -p $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd $SITEPATH
@@ -23,7 +24,7 @@ fn_install_site() {
 	    rm sitefiles.tar.gz
 	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
-	    echo "Domain Installed"
+	    echo "[OK] Site Installed"
 	   
     else
         echoY "$SITEPATH already exists."
@@ -45,8 +46,9 @@ function echoG
 }
 
 fn_install_ssl() {
-        #SSL INSTALL#
-        $SERVER_ROOT/bin/lswsctrl stop
+        echo
+        echoY "Installing SSL"
+        $SERVER_ROOT/bin/lswsctrl stop >/dev/null 2>&1
         /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
         echo
 	echoY "Restarting OpenLiteSpeed Webserver"
@@ -79,7 +81,7 @@ fn_test_webpage() {
         if [ $? != 0 ] ; then
         echo "Error: $PAGENAME Failed."
     else
-        echoG "OK: $PAGENAME Passed."
+        echo "[OK] $PAGENAME Passed."
 	echo
 	echoG "Congratulations!"
         echo "Your site is now live at https://$DOMAIN"
@@ -88,7 +90,7 @@ fn_test_webpage() {
 }
 
 fn_test_site() {
-	fn_test_webpage http://$DOMAIN/ "Congratulation" "Site test"  
+	fn_test_webpage http://$DOMAIN/ "Congratulation" "Site load test"  
 }
 
 fn_config_httpd() {
@@ -213,6 +215,5 @@ fn_install_ssl
 #fn_restart_ols
 fn_test_domain
 
-echo
 echo
 echo
