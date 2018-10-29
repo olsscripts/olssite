@@ -46,6 +46,13 @@ function echoG
     echo -e "\033[38;5;71m$FLAG\033[39m$@"
 }
 
+function echoR
+{
+    FLAG=$1
+    shift
+    echo -e "\033[38;5;203m$FLAG\033[39m$@"
+}
+
 fn_install_ssl() {
         echo
         echoY "Installing SSL"
@@ -80,7 +87,7 @@ fn_test_webpage() {
         grep "$KEYWORD" tmp.tmp  >/dev/null 2>&1
     
         if [ $? != 0 ] ; then
-        echo "Error: $PAGENAME Failed."
+        echoR "Error: $PAGENAME Failed."
     else
         echo "[OK] $PAGENAME Passed."
 	echo
