@@ -43,7 +43,7 @@ OLSINSTALLED=
 #Admin settings
 getRandPassword
 ADMINPASSWORD=$TEMPRANDSTR
-ADMINUSER=admin
+#ADMINUSER=admin
 ADMINPORT=7080
 EMAIL=
 
@@ -1012,7 +1012,7 @@ fi
 
 echo
 echoR "Starting to install OpenLiteSpeed to $SERVER_ROOT/ with the parameters below,"
-echoY "WebAdmin user:            " "$ADMINUSER"
+#echoY "WebAdmin user:            " "$ADMINUSER"
 echoY "WebAdmin password:        " "$ADMINPASSWORD"
 echoY "WebAdmin email:           " "$EMAIL"
 echoY "WebAdmin port:            " "$ADMINPORT"
@@ -1059,7 +1059,7 @@ check_wget
 install_ols
 
 #write the password file for record and remove the previous file.
-echo "WebAdmin username is [$ADMINUSER], password is [$ADMINPASSWORD]." > $SERVER_ROOT/password
+echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROOT/password
 
 
 set_ols_password
@@ -1114,7 +1114,7 @@ fi
 if [ "x$INSTALLSITE" = "x1" ] ; then
     echo "You can now access your site at https://$DOMAIN"
     echo "The OpenLiteSpeed Admin panel can now be accessed at https://$DOMAIN:$ADMINPORT"
-	echo "WebAdmin Username:$ADMINUSER   Password:$ADMINPASSWORD"
+	echo "WebAdmin Username:admin   Password:$ADMINPASSWORD"
 fi
 
 echo
