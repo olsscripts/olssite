@@ -396,8 +396,8 @@ function install_site
 	    cd "$SITEPATH"
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
-	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
-	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
+	    mv $SITEPATH/logs $PUBLIC_HTML/$SITEDOMAIN
+	    chown -R nobody:nobody $PUBLIC_HTML/$SITEDOMAIN
 	   
     else
         echoY "$SITEPATH exists, it will be used."
