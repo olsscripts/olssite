@@ -576,7 +576,9 @@ function config_ols_site
             sed -i -e "s/adminEmails/adminEmails $EMAIL\n#adminEmails/" "$SERVER_ROOT/conf/httpd_config.conf"
             sed -i -e "s/ls_enabled/ls_enabled   1\n#/" "$SERVER_ROOT/conf/httpd_config.conf"
 	    sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
+	    sleep 2
             sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
+	             
 
             VHOSTCONF=$SERVER_ROOT/conf/vhosts/$SITEDOMAIN/vhconf.conf
 
@@ -842,8 +844,7 @@ function test_ols
 }
 
 function test_site
-{
-    #test_page http://localhost:8088/  Congratulation "Test Example vhost Page" 
+{ 
     test_page http://$SITEDOMAIN:$SITEPORT/ "Congratulation" "Test HTTP first Page" 
     test_page https://$SITEDOMAIN:$SSLSITEPORT/ "Congratulation" "Test HTTPS first Page" 
 }
