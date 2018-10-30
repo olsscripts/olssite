@@ -540,9 +540,13 @@ function set_ols_password
 }
 
 
+<<<<<<< HEAD
 #1
 #2
 #3
+=======
+
+>>>>>>> parent of a47ae08... Update olssite.sh
 
 function config_ols
 {
