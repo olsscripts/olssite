@@ -20,7 +20,7 @@
 ###    Author: dxu@litespeedtech.com (David Shue)
 ###    Modified by Xpressos CDC.
 
-
+#WATS
 TEMPRANDSTR=
 function getRandPassword
 {
