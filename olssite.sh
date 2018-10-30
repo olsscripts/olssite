@@ -601,7 +601,7 @@ setUIDMode              2
 
 listener Main {
   map                     $SITEDOMAIN $SITEDOMAIN
-  address                 *:80
+  address                 *:$SITEPORT
   secure                  1
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
@@ -610,7 +610,7 @@ listener Main {
 
 listener SSL {
   map                     $SITEDOMAIN $SITEDOMAIN
-  address                 *:443
+  address                 *:$SSLSITEPORT
   secure                  1
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
