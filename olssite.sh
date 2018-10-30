@@ -606,7 +606,6 @@ listener Main {
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
   certChain               1
-  
 }
 
 listener SSL {
@@ -615,8 +614,7 @@ listener SSL {
   secure                  1
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
-  certChain               1
-  
+  certChain               1  
 }
  
 suspendedVhosts           Example
