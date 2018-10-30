@@ -548,11 +548,6 @@ function set_ols_password
 
 >>>>>>> parent of a47ae08... Update olssite.sh
 
-#main
-
-
-#test
-
 function config_ols
 {
     if [ -e "$SERVER_ROOT/conf/httpd_config.conf" ] ; then
