@@ -552,6 +552,7 @@ function set_ols_password
 
 #6
 #7
+#8
 
 function config_ols
 {
