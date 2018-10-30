@@ -582,8 +582,6 @@ function config_ols_site
 			sed -i '/railsEnv                 1/d' /usr/local/lsws/conf/httpd_config.conf
 			sleep 1
 	        sed -i '/map                      Example */d' -i.backup /usr/local/lsws/conf/httpd_config.conf
-	        sleep 2
-            sed -i '/map                     Example */d' /usr/local/lsws/conf/httpd_config.conf
 			sleep 1
 			sed -i '/ignoreRespCacheCtrl 0\b/a \ \   storagepath         cachedata' /usr/local/lsws/conf/httpd_config.conf
 	             
@@ -602,27 +600,26 @@ setUIDMode              2
 }
 
 listener Main {
+  map                     $SITEDOMAIN $SITEDOMAIN
   address                 *:80
   secure                  1
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
   certChain               1
-  map                     $SITEDOMAIN $SITEDOMAIN
-  map                     Example *
+  
 }
 
 listener SSL {
+  map                     $SITEDOMAIN $SITEDOMAIN
   address                 *:443
   secure                  1
   keyFile                 /etc/letsencrypt/live/$SITEDOMAIN/privkey.pem
   certFile                /etc/letsencrypt/live/$SITEDOMAIN/fullchain.pem
   certChain               1
-  map                     $SITEDOMAIN $SITEDOMAIN
-  map                     Example *
- }
+  
+}
  
- suspendedVhosts           Example
-
+suspendedVhosts           Example
 
 END
     
