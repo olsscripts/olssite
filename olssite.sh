@@ -391,6 +391,7 @@ function install_site
         local SITEDIRNAME=`dirname $SITEPATH`
         local SITEBASENAME=`basename $SITEPATH`
         mkdir -p "$SITEDIRNAME"
+	    echo
 	    echoY "Installing site ..."
 	    echo
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
@@ -400,6 +401,7 @@ function install_site
 	    mv $SITEPATH/logs $PUBLIC_HTML/$SITEDOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$SITEDOMAIN
 	    echoY "[OK] Site Installed."
+	    echo
 	    echo
 	   
     else
@@ -875,15 +877,12 @@ function test_site
 #####################################################################################
 ####   Main function here
 #####################################################################################
+###start here 1###
 check_root
 check_wget
 check_os
 kill_apache
 display_license
-getCurStatus
-update_centos_hashlib
-install_ols
-set_ols_password
 
 while [ "$1" != "" ] ; do
     case $1 in
@@ -1046,6 +1045,11 @@ if [ "x$FORCEYES" != "x0" ] ; then
     echo 
 fi
 
+###start here 2###
+getCurStatus
+update_centos_hashlib
+install_ols
+set_ols_password
 
 #write the password file for record and remove the previous file.
 echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROOT/password
