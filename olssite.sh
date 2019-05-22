@@ -64,7 +64,7 @@ FORCEYES=0
 LSPHPVERLIST=(54 55 56 70 71 72)
 
 #default version
-LSPHPVER=56
+LSPHPVER=72
 USEDEFAULTLSPHP=1
 
 ALLERRORS=0
@@ -250,7 +250,7 @@ function install_ols_centos
     fi
     
     
-    #yum -y $action epel-release
+    yum -y $action epel-release
     rpm -Uvh http://rpms.litespeedtech.com/centos/litespeed-repo-1.1-1.el$OSVER.noarch.rpm
     yum -y $action openlitespeed
     
