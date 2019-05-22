@@ -875,7 +875,15 @@ function test_site
 #####################################################################################
 ####   Main function here
 #####################################################################################
-
+check_root
+check_wget
+check_os
+kill_apache
+display_license
+getCurStatus
+update_centos_hashlib
+install_ols
+set_ols_password
 
 while [ "$1" != "" ] ; do
     case $1 in
@@ -1039,23 +1047,9 @@ if [ "x$FORCEYES" != "x0" ] ; then
 fi
 
 
-####begin here#####
-check_root
-check_os
-kill_apache
-display_license
-getCurStatus
-
-update_centos_hashlib
-check_wget
-install_ols
-
 #write the password file for record and remove the previous file.
 echo "WebAdmin username is [admin], password is [$ADMINPASSWORD]." > $SERVER_ROOT/password
-
-
-set_ols_password
-  
+ 
 if [ "x$SITEINSTALLED" != "x1" ] ; then
         install_site
 	config_ols_site
