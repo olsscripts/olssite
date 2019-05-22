@@ -132,8 +132,8 @@ function check_wget
 function display_license
 {
     echoY '**********************************************************************************************'
-    echoY '*                    Open LiteSpeed One click installation, Version 1.9                      *'
-    echoY '*                    Copyright (C) 2016 - 2018 LiteSpeed Technologies, Inc.                  *'
+    echoY '*                    Open LiteSpeed One click site installation, Version 2.0                 *'
+    echoY '*                    Copyright (C) 2016 - 2019 LiteSpeed Technologies, Inc.                  *'
     echoY '**********************************************************************************************'
 }
 
@@ -810,7 +810,7 @@ function kill_apache
 {
    if [ "x$SITEPORT" = "x80" ] ; then
       echo
-      echoY "Stopping any Web Servers that may be using port 80."
+      echo "Stopping any Web Servers that may be using port 80."
       echo
       yum -y remove httpd >/dev/null 2>&1
       killall -9 apache  >/dev/null 2>&1
@@ -875,7 +875,7 @@ function test_site
 #####################################################################################
 ####   Main function here
 #####################################################################################
-display_license
+
 
 while [ "$1" != "" ] ; do
     case $1 in
@@ -959,10 +959,7 @@ while [ "$1" != "" ] ; do
 done
 
 
-check_root
-check_os
-kill_apache
-getCurStatus
+
 #test if have $SERVER_ROOT , and backup it
 
 if [ "x$ACTION" = "xUNINSTALL" ] ; then
@@ -1043,6 +1040,12 @@ fi
 
 
 ####begin here#####
+check_root
+check_os
+kill_apache
+display_license
+getCurStatus
+
 update_centos_hashlib
 check_wget
 install_ols
