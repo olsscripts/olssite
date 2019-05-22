@@ -80,6 +80,11 @@ CERT=example.crt
 
 MYGITHUBURL=https://raw.githubusercontent.com/olsscripts/olssite/master/olssite.sh
 
+function update_centos
+{
+    yum -y update
+}
+
 function echoY
 {
     FLAG=$1
@@ -880,6 +885,7 @@ function test_site
 #####################################################################################
 ###start here 1###
 check_root
+update_centos
 check_wget
 check_os
 kill_apache
