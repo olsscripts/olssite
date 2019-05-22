@@ -250,7 +250,7 @@ function install_ols_centos
     fi
     
     
-    yum -y $action epel-release
+    #yum -y $action epel-release
     rpm -Uvh http://rpms.litespeedtech.com/centos/litespeed-repo-1.1-1.el$OSVER.noarch.rpm
     yum -y $action openlitespeed
     
