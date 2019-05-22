@@ -391,13 +391,15 @@ function install_site
         local SITEDIRNAME=`dirname $SITEPATH`
         local SITEBASENAME=`basename $SITEPATH`
         mkdir -p "$SITEDIRNAME"
-		
+	    echoY "Installing site ..."
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd "$SITEPATH"
 	    tar -xzf sitefiles.tar.gz
 	    rm sitefiles.tar.gz
 	    mv $SITEPATH/logs $PUBLIC_HTML/$SITEDOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$SITEDOMAIN
+	    echoY "[OK] Site Installed"
+	    echo
 	   
     else
         echoY "$SITEPATH exists, it will be used."
@@ -445,6 +447,7 @@ function install_ols
 function install_ssl
 {
         #SSL INSTALL#
+	echoY "Installing SSL on Server ..."
         systemctl stop lsws
         wget -P /usr/bin https://dl.eff.org/certbot-auto
         chmod +x /usr/bin/certbot-auto
@@ -529,9 +532,10 @@ function set_ols_password
     if [ $? = 0 ] ; then
         echo "admin:$ENCRYPT_PASS" > "$SERVER_ROOT/admin/conf/htpasswd"
         if [ $? = 0 ] ; then
-            echoY "Finished setting OpenLiteSpeed WebAdmin password to $ADMINPASSWORD."
+            echoY "[OK]OpenLiteSpeed Installed"
+            echoY "OpenLiteSpeed WebAdmin password: $ADMINPASSWORD."
             echoY "Finished updating server configuration."
-            
+            echo
         else
             echoY "OpenLiteSpeed WebAdmin password not changed."
         fi
@@ -800,6 +804,18 @@ function usage
     
 }
 
+function kill_apache
+{
+   if [ "x$SITEPORT" = "x80" ] ; then
+      echoY "Trying to stop some web servers that may be using port 80."
+      yum -y remove httpd >/dev/null 2>&1
+      killall -9 apache  >/dev/null 2>&1
+      killall -9 apache2  >/dev/null 2>&1
+      killall -9 httpd    >/dev/null 2>&1
+      killall -9 nginx    >/dev/null 2>&1
+   fi
+}
+
 function uninstall_warn
 {
     if [ "x$FORCEYES" != "x1" ] ; then
@@ -1024,6 +1040,7 @@ fi
 ####begin here#####
 update_centos_hashlib
 check_wget
+kill_apache
 install_ols
 
 #write the password file for record and remove the previous file.
@@ -1040,14 +1057,6 @@ else
     #normal ols installation without a site
     gen_selfsigned_cert
     config_ols
-fi
-
-if [ "x$SITEPORT" = "x80" ] ; then
-    echoY "Trying to stop some web servers that may be using port 80."
-    killall -9 apache  >/dev/null 2>&1
-    killall -9 apache2  >/dev/null 2>&1
-    killall -9 httpd    >/dev/null 2>&1
-    killall -9 nginx    >/dev/null 2>&1
 fi
 
 
