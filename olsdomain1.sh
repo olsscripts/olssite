@@ -230,7 +230,7 @@ fn_test_webpage() {
         echo "[OK] $PAGENAME Passed."
 	echo
 	echoG "Congratulations!"
-        echo "Your site is now live at https://$DOMAIN"
+        echo "Your site is live at https://$DOMAIN"
     fi
     rm tmp.tmp
 }
