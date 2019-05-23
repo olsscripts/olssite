@@ -140,6 +140,7 @@ fn_check_os() {
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then
             echo
+	    echo
     	    echoY "Installing your Site ..."
 	    echo
             mkdir -p $SITEPATH
@@ -179,6 +180,7 @@ function echoR
 
 fn_install_ssl() {
         echo
+	echo
         echoY "Installing SSL ..."
 	echo
         $SERVER_ROOT/bin/lswsctrl stop >/dev/null 2>&1
