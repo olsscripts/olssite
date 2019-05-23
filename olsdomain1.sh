@@ -47,6 +47,15 @@ fn_display_license() {
     echoY '********************************************************************************'
 }
 
+fn_install_info() {
+echo
+echoR "Installing your new Domain with the following parameters:"
+
+echoY "Enable SSL:               " "Yes"
+echoY "Site Domain:              " "$SITEDOMAIN"
+echoY "Site Path:                " "$SITEPATH"
+}
+
 fn_check_os() {
     OSNAMEVER=
     OSNAME=
@@ -346,6 +355,7 @@ done
 
 fn_display_license
 fn_check_os
+fn_install_info
 fn_install_site
 fn_config_httpd
 fn_install_ssl
