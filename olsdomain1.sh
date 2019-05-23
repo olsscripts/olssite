@@ -50,10 +50,10 @@ fn_display_license() {
 
 fn_install_info() {
 echo
-echoY "Installing your new Domain with the following parameters:"
-echoY "Enable SSL:               " "Yes"
-echoY "Site Domain:              " "$DOMAIN"
-echoY "Site Path:                " "$SITEPATH"
+echoY "Installing your New Domain with the following parameters:"
+echoY "Enable SSL:       " "Yes"
+echoY "Site Domain:      " "$DOMAIN"
+echoY "Site Path:        " "$SITEPATH"
 }
 
 fn_check_os() {
