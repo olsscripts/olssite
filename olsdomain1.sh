@@ -29,10 +29,113 @@ SITEPATH=
 DOMAIN=*
 EMAIL=
 
+#OS Info
+OSNAMEVER=UNKNOWN
+OSNAME=
+OSVER=
+OSTYPE=`uname -m`
+
 #Webserver settings
 SERVER_ROOT=/usr/local/lsws
 PUBLIC_HTML=/usr/local/lsws/www/
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
+
+fn_display_license() {
+    echoY '********************************************************************************'
+    echoY '*           Open LiteSpeed One click site installation, Version 2.0            *'
+    echoY '*            Copyright (C) 2016 - 2019 LiteSpeed Technologies, Inc.            *'
+    echoY '********************************************************************************'
+}
+
+fn_check_os() {
+    OSNAMEVER=
+    OSNAME=
+    OSVER=
+   
+    
+    if [ -f /etc/redhat-release ] ; then
+        cat /etc/redhat-release | grep " 6." >/dev/null
+        if [ $? = 0 ] ; then
+            OSNAMEVER=CENTOS6
+            OSNAME=centos
+            OSVER=6
+        else
+            cat /etc/redhat-release | grep " 7." >/dev/null
+            if [ $? = 0 ] ; then
+                OSNAMEVER=CENTOS7
+                OSNAME=centos
+                OSVER=7
+
+            fi
+        fi
+    elif [ -f /etc/lsb-release ] ; then
+        cat /etc/lsb-release | grep "DISTRIB_RELEASE=14." >/dev/null
+        if [ $? = 0 ] ; then
+            OSNAMEVER=UBUNTU14
+            OSNAME=ubuntu
+            OSVER=trusty
+            
+        else
+            cat /etc/lsb-release | grep "DISTRIB_RELEASE=16." >/dev/null
+            if [ $? = 0 ] ; then
+                OSNAMEVER=UBUNTU16
+                OSNAME=ubuntu
+                OSVER=xenial
+                
+                
+            else
+                cat /etc/lsb-release | grep "DISTRIB_RELEASE=18." >/dev/null
+                if [ $? = 0 ] ; then
+                    OSNAMEVER=UBUNTU18
+                    OSNAME=ubuntu
+                    OSVER=bionic
+                    
+                fi
+            fi
+        fi
+    elif [ -f /etc/debian_version ] ; then
+        cat /etc/debian_version | grep "^7." >/dev/null
+        if [ $? = 0 ] ; then
+            OSNAMEVER=DEBIAN7
+            OSNAME=debian
+            OSVER=wheezy
+            
+        else
+            cat /etc/debian_version | grep "^8." >/dev/null
+            if [ $? = 0 ] ; then
+                OSNAMEVER=DEBIAN8
+                OSNAME=debian
+                OSVER=jessie
+                
+            else
+                cat /etc/debian_version | grep "^9." >/dev/null
+                if [ $? = 0 ] ; then
+                    OSNAMEVER=DEBIAN9
+                    OSNAME=debian
+                    OSVER=stretch
+                    
+                fi
+            fi
+        fi
+    fi
+
+    if [ "x$OSNAMEVER" = "x" ] ; then
+        echoR "Sorry, currently one click installation only supports Centos(6,7), Debian(7-9) and Ubuntu(14,16,18)."
+        echoR "You can download the source code and build from it."
+        echoR "The url of the source code is https://github.com/olsscripts/olssite."
+        echo 
+        exit 1
+    else
+        if [ "x$OSNAME" = "xcentos" ] ; then
+	    echo
+            echoG "Current platform is "  "$OSNAME $OSVER."
+        else
+            export DEBIAN_FRONTEND=noninteractive
+            echoG "Current platform is "  "$OSNAMEVER $OSNAME $OSVER."
+        fi
+    fi
+}
+
 
 fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then
@@ -239,6 +342,8 @@ while [ "$1" != "" ] ; do
     shift
 done
 
+fn_display_license
+fn_check_os
 fn_install_site
 fn_config_httpd
 fn_install_ssl
