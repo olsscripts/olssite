@@ -1,4 +1,24 @@
 #!/bin/bash
+##############################################################################
+#    Open LiteSpeed is an open source HTTP server.                           #
+#    Copyright (C) 2013 - 2019 LiteSpeed Technologies, Inc.                  #
+#                                                                            #
+#    This program is free software: you can redistribute it and/or modify    #
+#    it under the terms of the GNU General Public License as published by    #
+#    the Free Software Foundation, either version 3 of the License, or       #
+#    (at your option) any later version.                                     #
+#                                                                            #
+#    This program is distributed in the hope that it will be useful,         #
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of          #
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the            #
+#    GNU General Public License for more details.                            #
+#                                                                            #
+#    You should have received a copy of the GNU General Public License       #
+#    along with this program. If not, see http://www.gnu.org/licenses/.      #
+##############################################################################
+
+###    Author: Xpressos CDC
+###    https://github.com/xpressos/OLSSCRIPTS-olsdomain
 
 FORCEYES=0
 ALLERRORS=0
@@ -18,6 +38,7 @@ fn_install_site() {
     if [ ! -e "$SITEPATH" ] ; then
             echo
     	    echoY "Installing your Site ..."
+	    echo
             mkdir -p $SITEPATH
 	    wget -P $SITEPATH https://github.com/olsscripts/olssite/raw/master/sitefiles.tar.gz
 	    cd $SITEPATH
@@ -25,7 +46,7 @@ fn_install_site() {
 	    rm sitefiles.tar.gz
 	    mv $SITEPATH/logs $PUBLIC_HTML/$DOMAIN
 	    chown -R nobody:nobody $PUBLIC_HTML/$DOMAIN
-	    echo "[OK] Site Installed"
+	    echoY "[OK] Site Installed."
 	   
     else
         echoY "$SITEPATH already exists."
@@ -55,7 +76,8 @@ function echoR
 
 fn_install_ssl() {
         echo
-        echoY "Installing SSL"
+        echoY "Installing SSL ..."
+	echo
         $SERVER_ROOT/bin/lswsctrl stop >/dev/null 2>&1
         /usr/bin/certbot-auto certonly --standalone -n --preferred-challenges http --agree-tos --expand --email $EMAIL -d $DOMAIN$VIRTHOST
         echo
