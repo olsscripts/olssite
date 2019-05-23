@@ -163,7 +163,8 @@ fn_install_site() {
 	   
     else
         echo
-	echoR "WARNING: " echo "$SITEPATH already exists."
+	echoR "WARNING: $SITEPATH already exists."
+	echoR "$DOMAIN must already be installed!"
     fi
 }
 
