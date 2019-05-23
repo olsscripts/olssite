@@ -162,7 +162,8 @@ fn_install_site() {
 	    echoY "[OK] Site Installed."
 	   
     else
-        echoY "$SITEPATH already exists."
+        echo
+	echoR "$SITEPATH already exists."
     fi
 }
 
