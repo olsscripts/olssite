@@ -41,6 +41,7 @@ PUBLIC_HTML=/usr/local/lsws/www/
 VIRTHOST=$(ps -ef | awk '{for (I=1;I<=NF;I++) if ($I == "virtualhost") {printf echo "," $(I+1)};}' /usr/local/lsws/conf/httpd_config.conf)
 
 fn_display_license() {
+    echo
     echoY '********************************************************************************'
     echoY '*           Open LiteSpeed One-Click Domain Installation, Version 1.0          *'
     echoY '*                       Copyright (C) 2019 Xpressos CDC.                       *'
@@ -49,10 +50,9 @@ fn_display_license() {
 
 fn_install_info() {
 echo
-echo "Installing your new Domain with the following parameters:"
-echo
+echoY "Installing your new Domain with the following parameters:"
 echoY "Enable SSL:               " "Yes"
-echoY "Site Domain:              " "$SITEDOMAIN"
+echoY "Site Domain:              " "$DOMAIN"
 echoY "Site Path:                " "$SITEPATH"
 }
 
@@ -309,7 +309,7 @@ fn_usage() {
     echoY "OPTIONS                            "
     echoG " --domain(-d) DOMAIN               " "To install your site with your chosen domain(option required)."
     echoG " --sitepath(-p) SITEPATH           " "To specify a location for the new site installation(option required)."
-    echoG " --email(-e) SITEPATH              " "To specify an email for SSL installation(option required)."
+    echoG " --email(-e) EMAIL              " "To specify an email for SSL installation(option required)."
     echoG " --quiet                           " "Set to quiet mode, won't prompt to input anything."
     echoG " --help(-h)                        " "To display usage."
     echo
